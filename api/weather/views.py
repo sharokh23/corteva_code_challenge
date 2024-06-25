@@ -27,9 +27,6 @@ class WeatherDataViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ["date"]
     pagination_class = StandardResultsSetPagination
 
-    def retrieve(self, request, *args, **kwargs):
-        raise MethodNotAllowed(request.method)
-
 
 class WeatherStatsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = WeatherStats.objects.all().order_by("year")
@@ -42,9 +39,6 @@ class WeatherStatsViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ["year"]
     pagination_class = StandardResultsSetPagination
 
-    def retrieve(self, request, *args, **kwargs):
-        raise MethodNotAllowed(request.method)
-
 
 class YieldStatsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = YieldStats.objects.all().order_by("year")
@@ -56,6 +50,3 @@ class YieldStatsViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_fields = ["year"]
     ordering_fields = ["year"]
     pagination_class = StandardResultsSetPagination
-
-    def retrieve(self, request, *args, **kwargs):
-        raise MethodNotAllowed(request.method)
