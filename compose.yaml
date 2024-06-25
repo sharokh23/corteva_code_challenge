@@ -1,0 +1,33 @@
+services:
+  # Database
+  db:
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+
+  # Django
+  api:
+    build:
+      context: api
+      target: builder
+    volumes:
+      - ./api:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db # Use the service name as hostname
+      - DEBUG=true
+    depends_on:
+      - db
+
+volumes:
+  db_data:
